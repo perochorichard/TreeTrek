@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "242007786147",
+    "firebase_url": "https://treetrek-77673.firebaseio.com",
+    "project_id": "treetrek-77673",
+    "storage_bucket": "treetrek-77673.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242007786147:android:1ccff04217ea7305f73516",
+        "android_client_info": {
+          "package_name": "com.lbna.TreeTrek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242007786147-v7ajpvamvf85fkjtg8baalsknkpeh0ku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4qT--2rBDunRUW0ujZBpYk06ehKObFOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242007786147-v7ajpvamvf85fkjtg8baalsknkpeh0ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
