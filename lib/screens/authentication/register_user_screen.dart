@@ -1,6 +1,7 @@
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:TreeTrek/services/validator_service.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,7 @@ class RegisterUserScreen extends StatelessWidget {
               BlockButton(
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    print("registration success");
+                    // TODO register
                   }
                 },
                 height: 50,

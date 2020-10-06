@@ -6,9 +6,7 @@ class AuthService {
 
   AuthService(this._firebaseAuth);
 
-  Stream<TreeTrekUser> get authStateChanges => _firebaseAuth
-      .authStateChanges()
-      .map((User user) => userFromFirebaseUser(user));
+  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
   Future<String> signInAnon() async {
     try {

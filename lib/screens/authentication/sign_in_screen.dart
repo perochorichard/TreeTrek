@@ -1,5 +1,6 @@
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,32 @@ class _SignInScreenState extends State<SignInScreen> {
                             email: emailController.text.trim(),
                             pass: passwordController.text.trim());
                     if (signinSuccess) {
+                      var user = context.read<User>();
+                      if (!user.emailVerified) {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Verify email'),
+                            content: Text(
+                                'Account is unverified. Please check your email for the verification link.'),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  user.sendEmailVerification();
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content:
+                                          Text('email verification sent')));
+                                },
+                                child: Text('RESEND'),
+                              ),
+                              FlatButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                       Navigator.pop(context);
                     } else {
                       showDialog(
