@@ -65,6 +65,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   BlockButton(
                     onPressed: () {
                       // TODO: SIGN UP PAGE
+                      Navigator.pushNamed(context, '/register');
                     },
                     height: 50,
                     title: Text('Sign Up'),

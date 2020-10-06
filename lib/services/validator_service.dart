@@ -6,9 +6,9 @@ class ValidatorService {
         .hasMatch(email);
   }
 
-  // Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
+  // Minimum six characters, at least one uppercase letter, one lowercase letter and one number
   static bool passwordValidator(String pass) {
-    return RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")
+    return RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$")
         .hasMatch(pass);
   }
 }
