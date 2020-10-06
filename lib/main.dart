@@ -1,4 +1,5 @@
 import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
+import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: AuthWrapperScreen(),
+        routes: {
+          '/sign-in': (context) => SignInScreen(),
+        },
       ),
     );
   }
