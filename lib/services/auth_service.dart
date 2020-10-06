@@ -1,3 +1,4 @@
+import 'package:TreeTrek/models/TreeTrekUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -5,7 +6,9 @@ class AuthService {
 
   AuthService(this._firebaseAuth);
 
-  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
+  Stream<TreeTrekUser> get authStateChanges => _firebaseAuth
+      .authStateChanges()
+      .map((User user) => userFromFirebaseUser(user));
 
   Future<String> signInAnon() async {
     try {
@@ -23,5 +26,9 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
+  }
+
+  TreeTrekUser userFromFirebaseUser(User user) {
+    return user != null ? TreeTrekUser(uid: user.uid) : null;
   }
 }
