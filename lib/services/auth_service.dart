@@ -12,10 +12,21 @@ class AuthService {
 
   Future<String> signInAnon() async {
     try {
-      _firebaseAuth.signInAnonymously();
+      await _firebaseAuth.signInAnonymously();
       return 'anonymous sign-in successful';
     } on FirebaseAuthException catch (e) {
       return e.message;
+    }
+  }
+
+  Future<bool> signInWithEmailAndPass({String email, String pass}) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: pass);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return false;
     }
   }
 

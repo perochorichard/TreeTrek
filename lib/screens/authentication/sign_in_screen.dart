@@ -1,36 +1,85 @@
+import 'package:TreeTrek/services/auth_service.dart';
+import 'package:TreeTrek/services/validator_service.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'password'),
-              obscureText: true,
-            ),
-            BlockButton(
-              onPressed: () {},
-              height: 50,
-              title: Text(
-                'Sign In',
-                style: TextStyle(color: Colors.white),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: (val) {
+                  if (val.isEmpty) {
+                    return 'enter email address';
+                  }
+                  return null;
+                },
               ),
-            ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
+              TextFormField(
+                controller: passwordController,
+                decoration: const InputDecoration(labelText: 'password'),
+                validator: (val) {
+                  if (val.isEmpty) {
+                    return 'enter password';
+                  }
+                  return null;
+                },
+                obscureText: true,
+              ),
+              BlockButton(
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    bool signinSuccess = await context
+                        .read<AuthService>()
+                        .signInWithEmailAndPass(
+                            email: emailController.text.trim(),
+                            pass: passwordController.text.trim());
+                    if (signinSuccess) {
+                      Navigator.pop(context);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Invalid'),
+                          content: Text(
+                              'the email or password you have entered are invalid.'),
+                          actions: [
+                            FlatButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text('ok'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  }
+                },
+                height: 50,
+                title: Text('Sign In'),
+              ),
+            ],
+          ),
         ),
       ),
     );
