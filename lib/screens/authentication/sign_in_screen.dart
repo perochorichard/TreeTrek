@@ -19,92 +19,104 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (val) {
-                  if (val.isEmpty) {
-                    return 'enter email address';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: passwordController,
-                decoration: const InputDecoration(labelText: 'password'),
-                validator: (val) {
-                  if (val.isEmpty) {
-                    return 'enter password';
-                  }
-                  return null;
-                },
-                obscureText: true,
-              ),
-              BlockButton(
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    bool signinSuccess = await context
-                        .read<AuthService>()
-                        .signInWithEmailAndPass(
-                            email: emailController.text.trim(),
-                            pass: passwordController.text.trim());
-                    if (signinSuccess) {
-                      var user = context.read<User>();
-                      if (!user.emailVerified) {
+      body: Builder(
+        // builder needed for SnackBar context
+        builder: (context) => Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(labelText: 'Email'),
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return 'enter email address';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(labelText: 'password'),
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return 'enter password';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                ),
+                BlockButton(
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      bool signinSuccess = await context
+                          .read<AuthService>()
+                          .signInWithEmailAndPass(
+                              email: emailController.text.trim(),
+                              pass: passwordController.text.trim());
+                      if (signinSuccess) {
+                        var user = context.read<User>();
+                        if (!user.emailVerified) {
+                          context.read<AuthService>().signOut();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text('Verify email'),
+                              content: Text(
+                                  'Account is unverified. Please check your email for the verification link.'),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text('email verification sent'),
+                                      ),
+                                    );
+                                    user.sendEmailVerification();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('RESEND'),
+                                ),
+                                FlatButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          Navigator.pop(context);
+                        }
+                      } else {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            title: Text('Verify email'),
+                            title: Text('Invalid'),
                             content: Text(
-                                'Account is unverified. Please check your email for the verification link.'),
+                                'the email or password you have entered are invalid.'),
                             actions: [
                               FlatButton(
-                                onPressed: () {
-                                  user.sendEmailVerification();
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                      content:
-                                          Text('email verification sent')));
-                                },
-                                child: Text('RESEND'),
-                              ),
-                              FlatButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: Text('OK'),
+                                child: Text('ok'),
                               ),
                             ],
                           ),
                         );
                       }
-                      Navigator.pop(context);
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          title: Text('Invalid'),
-                          content: Text(
-                              'the email or password you have entered are invalid.'),
-                          actions: [
-                            FlatButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: Text('ok'),
-                            ),
-                          ],
-                        ),
-                      );
                     }
-                  }
-                },
-                height: 50,
-                title: Text('Sign In'),
-              ),
-            ],
+                  },
+                  height: 50,
+                  title: Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -28,6 +28,17 @@ class AuthService {
     }
   }
 
+  Future<bool> registerEmailAndPass({String email, String pass}) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: pass);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+
   String signOut() {
     try {
       _firebaseAuth.signOut();

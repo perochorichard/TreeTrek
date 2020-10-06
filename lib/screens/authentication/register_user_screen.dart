@@ -64,11 +64,60 @@ class RegisterUserScreen extends StatelessWidget {
               BlockButton(
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    // TODO register
+                    if (await context.read<AuthService>().registerEmailAndPass(
+                          email: _emailController.text.trim(),
+                          pass: _passwordController.text.trim(),
+                        )) {
+                      var user = context.read<User>();
+                      user.sendEmailVerification();
+                      context.read<AuthService>().signOut();
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Validate Email'),
+                          content: Text(
+                              'Please check your email for a validation link.'),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                user.sendEmailVerification();
+                                Scaffold.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('email verification sent'),
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              },
+                              child: Text('RESEND'),
+                            ),
+                            FlatButton(
+                              onPressed: () => Navigator.popUntil(
+                                  context,
+                                  ModalRoute.withName(
+                                      Navigator.defaultRouteName)),
+                              child: Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: Text('Email already in use'),
+                                content: Text(
+                                    'the email you have entered is already registered'),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text('OK'))
+                                ],
+                              ));
+                    }
                   }
                 },
                 height: 50,
-                title: Text('Sign In'),
+                title: Text('Sign Up'),
               ),
             ],
           ),
