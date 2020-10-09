@@ -3,6 +3,7 @@ import 'package:TreeTrek/screens/authentication/authentication_screen.dart';
 import 'package:TreeTrek/screens/authentication/register_user_screen.dart';
 import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
+import 'package:TreeTrek/services/trail_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<AuthService>(
           create: (_) => AuthService(FirebaseAuth.instance),
+        ),
+        Provider<TrailService>(
+          create: (_) => TrailService(),
         ),
         StreamProvider(
           create: (context) => context.read<AuthService>().authStateChanges,
