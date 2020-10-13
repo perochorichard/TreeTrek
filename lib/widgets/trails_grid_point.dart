@@ -10,7 +10,7 @@ class TrailsGridPoint extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(20),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context)

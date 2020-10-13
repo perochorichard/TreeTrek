@@ -8,6 +8,7 @@ class TrailsProvider with ChangeNotifier {
   final List<String> _paths = [
     'assets/trails/conifer_walk/coniferwalk',
     'assets/trails/maple_walk/maplewalk',
+    'assets/trails/gentle_giants_2_walk/gentlegiants2walk'
   ];
   List<Trail> _trails = [];
 

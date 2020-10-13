@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border(
-                    top: BorderSide(color: Colors.white, width: 3),
+                    top: BorderSide(color: Colors.black, width: 3),
                   ),
                   color: Colors.yellow,
                 ),

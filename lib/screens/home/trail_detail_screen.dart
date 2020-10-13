@@ -97,7 +97,8 @@ class TrailDetailScreen extends StatelessWidget {
                     // description
                     Container(
                       constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height / 3),
+                        maxHeight: MediaQuery.of(context).size.height / 3,
+                      ),
                       padding: EdgeInsets.symmetric(vertical: 20),
                       child: Scrollbar(
                         child: CustomScrollView(

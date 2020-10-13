@@ -58,6 +58,8 @@ flutter:
     - assets/trails/conifer_walk/images/
     - assets/trails/maple_walk/
     - assets/trails/maple_walk/images/
+    - assets/trails/gentle_giants_2_walk/
+    - assets/trails/gentle_giants_2_walk/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
