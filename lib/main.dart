@@ -2,7 +2,9 @@ import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
 import 'package:TreeTrek/screens/authentication/register_user_screen.dart';
 import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
+import 'package:TreeTrek/screens/home/maps/preview_trail_screen.dart';
 import 'package:TreeTrek/screens/home/trail_detail_screen.dart';
+import 'package:TreeTrek/screens/home/trails_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
           '/auth-wrapper': (context) => AuthWrapperScreen(),
           '/register': (context) => RegisterUserScreen(),
           '/trail-detail': (context) => TrailDetailScreen(),
+          '/trail-list': (context) => TrailsScreen(),
+          'preview-trail': (context) => PreviewTrailScreen(),
         },
       ),
     );
