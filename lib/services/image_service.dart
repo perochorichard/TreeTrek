@@ -15,6 +15,7 @@ class ImageService {
           .asUint8List();
     } catch (e) {
       print('from ${this.runtimeType}: error retrieving image \'$path\'');
+      return null;
     }
   }
 }

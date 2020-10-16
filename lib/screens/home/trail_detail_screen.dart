@@ -127,7 +127,7 @@ class TrailDetailScreen extends StatelessWidget {
                         style: Fonts().primaryText,
                       ),
                       color: Colors.white,
-                    )
+                    ),
                   ],
                 ),
               )
