@@ -118,7 +118,7 @@ class TrailDetailScreen extends StatelessWidget {
                     // view trail button
                     BlockButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'preview-trail',
+                        Navigator.pushNamed(context, '/preview-trail',
                             arguments: trail.id);
                       },
                       height: 50,

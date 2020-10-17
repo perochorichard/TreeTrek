@@ -2,13 +2,16 @@ import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
 import 'package:TreeTrek/screens/authentication/register_user_screen.dart';
 import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
+import 'package:TreeTrek/screens/home/maps/explore_screen.dart';
 import 'package:TreeTrek/screens/home/maps/preview_trail_screen.dart';
 import 'package:TreeTrek/screens/home/trail_detail_screen.dart';
 import 'package:TreeTrek/screens/home/trails_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
+import 'package:TreeTrek/services/geolocator_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -21,6 +24,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Location().hasPermission().then((value) {
+      if (value != PermissionStatus.granted) {
+        Location().requestPermission();
+      }
+    });
     return MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -31,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider(
           create: (context) => context.read<AuthService>().authStateChanges,
+        ),
+        Provider<GeolocatorService>(
+          create: (_) => GeolocatorService(),
         ),
       ],
       child: MaterialApp(
@@ -50,7 +61,8 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterUserScreen(),
           '/trail-detail': (context) => TrailDetailScreen(),
           '/trail-list': (context) => TrailsScreen(),
-          'preview-trail': (context) => PreviewTrailScreen(),
+          '/preview-trail': (context) => PreviewTrailScreen(),
+          '/explore': (context) => ExploreScreen(),
         },
       ),
     );
