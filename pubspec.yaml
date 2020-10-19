@@ -33,6 +33,7 @@ dependencies:
   # stand alone
   provider: ^4.3.2+2
   path_provider: ^1.6.18
+  step_progress_indicator: ^0.2.4+7
 
   # gps
   google_maps_flutter: ^1.0.2

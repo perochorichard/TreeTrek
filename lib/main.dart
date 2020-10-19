@@ -1,9 +1,11 @@
+import 'package:TreeTrek/providers/image_provider.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
 import 'package:TreeTrek/screens/authentication/register_user_screen.dart';
 import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
 import 'package:TreeTrek/screens/home/maps/explore_screen.dart';
 import 'package:TreeTrek/screens/home/maps/preview_trail_screen.dart';
+import 'package:TreeTrek/screens/home/maps/tree_detail_screen.dart';
 import 'package:TreeTrek/screens/home/trail_detail_screen.dart';
 import 'package:TreeTrek/screens/home/trails_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
@@ -33,6 +35,9 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<AuthService>(
           create: (_) => AuthService(FirebaseAuth.instance),
+        ),
+        Provider<ImageServiceProvider>(
+          create: (_) => ImageServiceProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => TrailsProvider(),

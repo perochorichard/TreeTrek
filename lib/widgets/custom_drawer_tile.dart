@@ -1,3 +1,4 @@
+import 'package:TreeTrek/shared/fonts.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawerTile extends StatelessWidget {
@@ -16,6 +17,7 @@ class CustomDrawerTile extends StatelessWidget {
               children: <Widget>[
                 Text(
                   title,
+                  style: Fonts.secondaryText.copyWith(color: Colors.white),
                 ),
               ],
             ),

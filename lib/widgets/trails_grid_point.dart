@@ -40,11 +40,11 @@ class TrailsGridPoint extends StatelessWidget {
                         children: [
                           Text(
                             trail.title,
-                            style: Fonts().primaryText,
+                            style: Fonts.primaryText,
                           ),
                           Text(
                             '${trail.distanceMeters / 1000} km',
-                            style: Fonts().secondaryText,
+                            style: Fonts.secondaryText,
                           )
                         ],
                       ),

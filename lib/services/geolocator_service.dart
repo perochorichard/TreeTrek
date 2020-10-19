@@ -11,9 +11,9 @@ class GeolocatorService {
         desiredAccuracy: LocationAccuracy.high, distanceFilter: 10);
   }
 
-  Future<double> getDistanceBetween(LatLng startPos, LatLng endPos) async {
-    return distanceBetween(startPos.latitude, startPos.longitude,
-        endPos.latitude, endPos.longitude);
+  Future<double> getDistanceBetween(
+      double startLat, double startLong, double endLat, double endLong) async {
+    return distanceBetween(startLat, startLong, endLat, endLong);
   }
 
   void centerToPosition(

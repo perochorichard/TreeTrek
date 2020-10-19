@@ -1,5 +1,7 @@
 import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
+import 'package:TreeTrek/shared/custom_theme.dart';
+import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/custom_drawer.dart';
 import 'package:TreeTrek/widgets/trails_grid_point.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,15 @@ class TrailsScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text('Trails'),
+            title: Text(
+              'Trails',
+              style: Fonts.primaryText
+                  .copyWith(color: CustomTheme.primaryThemeColor),
+            ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
             elevation: 0,
+            iconTheme: IconThemeData(color: CustomTheme.primaryThemeColor),
           ),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(

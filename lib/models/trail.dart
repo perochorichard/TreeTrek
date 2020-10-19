@@ -10,19 +10,22 @@ class Trail {
 
   final int id;
   final LatLng centerCoordinate;
+  final double zoom;
   final List<LatLng> trailLine;
 
   final List<Tree> trees;
 
-  Trail(
-      {@required this.title,
-      @required this.description,
-      @required this.thumbnailImageSrc,
-      @required this.distanceMeters,
-      @required this.id,
-      @required this.centerCoordinate,
-      @required this.trailLine,
-      @required this.trees});
+  Trail({
+    @required this.title,
+    @required this.description,
+    @required this.thumbnailImageSrc,
+    @required this.distanceMeters,
+    @required this.id,
+    @required this.centerCoordinate,
+    @required this.zoom,
+    @required this.trailLine,
+    @required this.trees,
+  });
 
   factory Trail.fromJson(Map<String, dynamic> data) {
     List<Tree> trees = [];
@@ -45,6 +48,7 @@ class Trail {
         distanceMeters: data['distanceMeters'],
         id: data['id'],
         centerCoordinate: LatLng.fromJson(data['centerCoordinate']),
+        zoom: data['zoom'],
         trailLine: trailLine,
         trees: trees);
   }

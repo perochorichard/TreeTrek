@@ -1,5 +1,6 @@
 import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
+import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
 import 'package:TreeTrek/widgets/custom_drawer.dart';
@@ -15,7 +16,7 @@ class TrailDetailScreen extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.black.withOpacity(0.7),
+          backgroundColor: CustomTheme.primaryThemeColor,
           iconTheme: IconThemeData(color: Colors.white),
         ),
         body: Container(
@@ -38,8 +39,7 @@ class TrailDetailScreen extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 20),
                       child: Text(
                         trail.title,
-                        style:
-                            Fonts().primaryText.copyWith(color: Colors.white),
+                        style: Fonts.primaryText.copyWith(color: Colors.white),
                       ),
                     ), // title
                     // distance and tree count
@@ -51,14 +51,12 @@ class TrailDetailScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Distance',
-                                style: Fonts()
-                                    .secondaryText
+                                style: Fonts.secondaryText
                                     .copyWith(color: Colors.white),
                               ),
                               Text(
                                 '${trail.distanceMeters / 1000} km',
-                                style: Fonts()
-                                    .secondaryText
+                                style: Fonts.secondaryText
                                     .copyWith(color: Colors.white),
                               ),
                             ],
@@ -69,14 +67,12 @@ class TrailDetailScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Tree Count',
-                                style: Fonts()
-                                    .secondaryText
+                                style: Fonts.secondaryText
                                     .copyWith(color: Colors.white),
                               ),
                               Text(
                                 trail.trees.length.toString(),
-                                style: Fonts()
-                                    .secondaryText
+                                style: Fonts.secondaryText
                                     .copyWith(color: Colors.white),
                               ),
                             ],
@@ -106,8 +102,7 @@ class TrailDetailScreen extends StatelessWidget {
                             SliverToBoxAdapter(
                               child: Text(
                                 trail.description,
-                                style: Fonts()
-                                    .secondaryText
+                                style: Fonts.secondaryText
                                     .copyWith(color: Colors.white),
                               ),
                             )
@@ -124,9 +119,9 @@ class TrailDetailScreen extends StatelessWidget {
                       height: 50,
                       title: Text(
                         'View Trail',
-                        style: Fonts().primaryText,
+                        style: Fonts.primaryText.copyWith(color: Colors.white),
                       ),
-                      color: Colors.white,
+                      color: CustomTheme.primaryThemeColor,
                     ),
                   ],
                 ),
