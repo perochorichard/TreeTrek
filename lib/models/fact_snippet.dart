@@ -13,7 +13,7 @@ class FactSnippet {
   factory FactSnippet.fromJson(Map<String, dynamic> data) {
     String url = '';
     if (data['image'].toString().isNotEmpty) {
-      url = '${data['root']}/images/${data['image']}';
+      url = data['image'];
     }
     return FactSnippet(
       imagePath: url,
