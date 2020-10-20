@@ -6,6 +6,7 @@ import 'package:TreeTrek/screens/authentication/sign_in_screen.dart';
 import 'package:TreeTrek/screens/home/maps/explore_screen.dart';
 import 'package:TreeTrek/screens/home/maps/preview_trail_screen.dart';
 import 'package:TreeTrek/screens/home/maps/tree_detail_screen.dart';
+import 'package:TreeTrek/screens/home/post_result_screen.dart';
 import 'package:TreeTrek/screens/home/trail_detail_screen.dart';
 import 'package:TreeTrek/screens/home/trails_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
           '/trail-list': (context) => TrailsScreen(),
           '/preview-trail': (context) => PreviewTrailScreen(),
           '/explore': (context) => ExploreScreen(),
+          '/post-result': (context) => PostResultScreen(),
         },
       ),
     );

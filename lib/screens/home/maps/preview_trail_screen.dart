@@ -121,7 +121,7 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
                         _controller, LatLng(pos.latitude, pos.longitude), zoom);
                   },
                   child: Icon(
-                    Icons.location_on,
+                    Icons.gps_fixed,
                     size: 35,
                     color: Colors.white,
                   ),

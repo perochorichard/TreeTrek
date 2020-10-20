@@ -34,6 +34,7 @@ dependencies:
   provider: ^4.3.2+2
   path_provider: ^1.6.18
   step_progress_indicator: ^0.2.4+7
+  shared_preferences: ^0.5.12+2
 
   # gps
   google_maps_flutter: ^1.0.2
@@ -63,6 +64,8 @@ flutter:
     - assets/trails/maple_walk/images/
     - assets/trails/gentle_giants_2_walk/
     - assets/trails/gentle_giants_2_walk/images/
+    - assets/trails/heritage_tree_walk/
+    - assets/trails/heritage_tree_walk/images/
     - assets/tree_icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see

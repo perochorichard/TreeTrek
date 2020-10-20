@@ -1,9 +1,7 @@
-import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
-import 'package:TreeTrek/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +76,18 @@ class TrailDetailScreen extends StatelessWidget {
                             ],
                           ),
                           Spacer(),
+                          if (trail.type == 'walk')
+                            Icon(
+                              Icons.directions_walk,
+                              color: Colors.white,
+                              size: 50,
+                            )
+                          else if (trail.type == 'bike')
+                            Icon(
+                              Icons.directions_bike,
+                              color: Colors.white,
+                              size: 50,
+                            )
                         ],
                       ),
                       padding: EdgeInsets.only(bottom: 20),

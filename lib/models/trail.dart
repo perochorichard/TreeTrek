@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class Trail {
   final String title;
   final String description;
+  final String type;
   final String thumbnailImageSrc;
   final int distanceMeters;
 
@@ -25,6 +26,7 @@ class Trail {
     @required this.zoom,
     @required this.trailLine,
     @required this.trees,
+    @required this.type,
   });
 
   factory Trail.fromJson(Map<String, dynamic> data) {
@@ -42,14 +44,16 @@ class Trail {
     }
 
     return Trail(
-        title: data['title'],
-        description: data['description'],
-        thumbnailImageSrc: url,
-        distanceMeters: data['distanceMeters'],
-        id: data['id'],
-        centerCoordinate: LatLng.fromJson(data['centerCoordinate']),
-        zoom: data['zoom'],
-        trailLine: trailLine,
-        trees: trees);
+      title: data['title'],
+      description: data['description'],
+      thumbnailImageSrc: url,
+      distanceMeters: data['distanceMeters'],
+      id: data['id'],
+      centerCoordinate: LatLng.fromJson(data['centerCoordinate']),
+      zoom: data['zoom'],
+      trailLine: trailLine,
+      trees: trees,
+      type: data['type'],
+    );
   }
 }
