@@ -1,10 +1,7 @@
-import 'package:TreeTrek/models/TreeTrekUser.dart';
 import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
-import 'package:TreeTrek/services/database_service.dart';
 import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';
-import 'package:TreeTrek/widgets/block_button.dart';
 import 'package:TreeTrek/widgets/custom_drawer.dart';
 import 'package:TreeTrek/widgets/trails_grid_point.dart';
 import 'package:flutter/material.dart';
@@ -13,49 +10,40 @@ import 'package:provider/provider.dart';
 class TrailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final trails = context.watch<TrailsProvider>().trails;
-    final user = context.watch<TreeTrekUser>();
-    final dbService = context.watch<DatabaseService>();
-    print(user);
+    var trails = context.watch<TrailsProvider>().trails;
     return Scaffold(
       drawer: CustomDrawer(),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text(
-              user.tavelDistanceMeters.toString(),
-              style: Fonts.primaryText
-                  .copyWith(color: CustomTheme.primaryThemeColor),
+      body: trails.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  title: Text(
+                    'Trails',
+                    style: Fonts.primaryText
+                        .copyWith(color: CustomTheme.primaryThemeColor),
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  iconTheme:
+                      IconThemeData(color: CustomTheme.primaryThemeColor),
+                ),
+                SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) {
+                      return Provider<Trail>.value(
+                          value: trails[i], child: TrailsGridPoint());
+                    },
+                    childCount: trails.length,
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                )
+              ],
             ),
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            iconTheme: IconThemeData(color: CustomTheme.primaryThemeColor),
-          ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) {
-                return Provider<Trail>.value(
-                    value: trails[i], child: TrailsGridPoint());
-              },
-              childCount: trails.length,
-            ),
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          ),
-          SliverToBoxAdapter(
-            child: BlockButton(
-                onPressed: () {
-                  user.tavelDistanceMeters += 1;
-                  user.trailHistory = [1, 2, 3, 2, 3];
-                  user.treesSeen = 50;
-                  dbService.updateUserData(user);
-                },
-                height: 50,
-                title: Text('update database')),
-          )
-        ],
-      ),
     );
   }
 }

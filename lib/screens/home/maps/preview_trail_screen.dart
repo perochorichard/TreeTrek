@@ -29,6 +29,8 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
 
   Trail _trail;
 
+  bool _loadingVisible = false;
+
   void _onMapCreated(GoogleMapController controller) async {
     // SET TREE MARKERS AND POLY LINES
     Set<Marker> tempMarkers = HashSet<Marker>();
@@ -89,6 +91,15 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
             polylines: _polylines,
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
+            mapToolbarEnabled: false,
+          ),
+          Container(
+            alignment: Alignment.topRight,
+            padding: EdgeInsets.all(10),
+            child: Visibility(
+              visible: _loadingVisible,
+              child: CircularProgressIndicator(),
+            ),
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 40),
@@ -115,14 +126,20 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
                 ),
                 RawMaterialButton(
                   onPressed: () async {
+                    setState(() {
+                      _loadingVisible = true;
+                    });
                     Position pos = await _geoService.getInitialPosition();
                     double zoom = await _controller.getZoomLevel();
                     _geoService.centerToPosition(
                         _controller, LatLng(pos.latitude, pos.longitude), zoom);
+                    setState(() {
+                      _loadingVisible = false;
+                    });
                   },
                   child: Icon(
                     Icons.gps_fixed,
-                    size: 35,
+                    size: 40,
                     color: Colors.white,
                   ),
                   fillColor: CustomTheme.primaryThemeColor,

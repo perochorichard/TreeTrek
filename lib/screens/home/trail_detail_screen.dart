@@ -10,7 +10,6 @@ class TrailDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context).settings.arguments as int;
     final trail = context.watch<TrailsProvider>().findById(id);
-
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
