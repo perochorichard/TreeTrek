@@ -1,4 +1,5 @@
 import 'package:TreeTrek/models/TreeTrekUser.dart';
+import 'package:TreeTrek/services/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -10,7 +11,16 @@ class AuthService {
 
   Future<String> signInAnon() async {
     try {
-      await _firebaseAuth.signInAnonymously();
+      UserCredential userCred = await _firebaseAuth.signInAnonymously();
+      DatabaseService(uid: userCred.user.uid).updateUserData(
+        TreeTrekUser(
+          uid: userCred.user.uid,
+          tavelDistanceMeters: 0,
+          trailHistory: [],
+          trailsCompleted: 0,
+          treesSeen: 0,
+        ),
+      );
       return 'anonymous sign-in successful';
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -19,8 +29,17 @@ class AuthService {
 
   Future<bool> signInWithEmailAndPass({String email, String pass}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      UserCredential userCred = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pass);
+      DatabaseService(uid: userCred.user.uid).updateUserData(
+        TreeTrekUser(
+          uid: userCred.user.uid,
+          tavelDistanceMeters: 0,
+          trailHistory: [],
+          trailsCompleted: 0,
+          treesSeen: 0,
+        ),
+      );
       return true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -48,7 +67,7 @@ class AuthService {
     }
   }
 
-  TreeTrekUser userFromFirebaseUser(User user) {
-    return user != null ? TreeTrekUser(uid: user.uid) : null;
-  }
+  // TreeTrekUser userFromFirebaseUser(User user) {
+  //   return user != null ? TreeTrekUser(uid: user.uid) : null;
+  // }
 }

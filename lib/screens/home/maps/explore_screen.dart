@@ -232,6 +232,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                   actions: [
                                     FlatButton(
                                       onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'NO',
+                                        style: Fonts.primaryText
+                                            .copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
                                         Navigator.popUntil(
                                           context,
                                           ModalRoute.withName(
