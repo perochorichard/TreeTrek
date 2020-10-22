@@ -1,4 +1,3 @@
-import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';

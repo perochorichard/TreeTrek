@@ -159,6 +159,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             circles: _circles,
             zoomControlsEnabled: false,
             myLocationEnabled: true,
+            myLocationButtonEnabled: false,
             mapToolbarEnabled: false,
           ),
           Container(

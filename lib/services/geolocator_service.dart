@@ -3,17 +3,18 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GeolocatorService {
   Future<Position> getInitialPosition() {
-    return getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   Stream<Position> getCurrentLocation() {
-    return getPositionStream(
+    return Geolocator.getPositionStream(
         desiredAccuracy: LocationAccuracy.high, distanceFilter: 10);
   }
 
   Future<double> getDistanceBetween(
       double startLat, double startLong, double endLat, double endLong) async {
-    return distanceBetween(startLat, startLong, endLat, endLong);
+    return Geolocator.distanceBetween(startLat, startLong, endLat, endLong);
   }
 
   void centerToPosition(
