@@ -67,6 +67,7 @@ flutter:
     - assets/trails/heritage_tree_walk/
     - assets/trails/heritage_tree_walk/images/
     - assets/tree_icons/
+    - assets/other/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

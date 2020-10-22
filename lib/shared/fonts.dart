@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/src/painting/text_style.dart';
 
 class Fonts {
+  static final TextStyle specialText =
+      TextStyle(fontSize: 25, fontWeight: FontWeight.normal);
   static final TextStyle primaryText =
       TextStyle(fontSize: 24, fontWeight: FontWeight.normal);
   static final TextStyle secondaryText =
