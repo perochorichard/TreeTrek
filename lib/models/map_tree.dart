@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:TreeTrek/models/tree.dart';
 import 'package:TreeTrek/providers/image_provider.dart';
 import 'package:TreeTrek/services/geolocator_service.dart';

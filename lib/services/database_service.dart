@@ -19,11 +19,11 @@ class DatabaseService {
 
   Stream<TreeTrekUser> get updatedTreeTrekUser {
     return userDataCollection.doc(uid).snapshots().map((snapshot) {
-      return _treeTrekUser(snapshot);
+      return treeTrekUser(snapshot);
     });
   }
 
-  TreeTrekUser _treeTrekUser(DocumentSnapshot snapshot) {
+  TreeTrekUser treeTrekUser(DocumentSnapshot snapshot) {
     var userData = snapshot.data();
     return TreeTrekUser(
       uid: uid,

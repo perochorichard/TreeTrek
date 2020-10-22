@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:typed_data';
 
 import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/models/tree.dart';

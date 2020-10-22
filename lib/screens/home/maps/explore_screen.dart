@@ -1,6 +1,6 @@
 import 'dart:collection';
-import 'dart:typed_data';
 
+import 'package:TreeTrek/models/TreeTrekUser.dart';
 import 'package:TreeTrek/models/map_tree.dart';
 import 'package:TreeTrek/models/trail.dart';
 import 'package:TreeTrek/models/trail_progress.dart';
@@ -8,10 +8,12 @@ import 'package:TreeTrek/models/tree.dart';
 import 'package:TreeTrek/providers/image_provider.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/screens/home/maps/tree_detail_screen.dart';
+import 'package:TreeTrek/services/database_service.dart';
 import 'package:TreeTrek/services/geolocator_service.dart';
 import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/custom_dialog_box.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -220,7 +222,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: RawMaterialButton(
                             onPressed: () {
-                              // TODO: cancel explore
                               showDialog(
                                 context: context,
                                 builder: (_) => CustomDialogBox(
@@ -274,7 +275,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         // // SAVE EXPLORE
                         // RawMaterialButton(
                         //   onPressed: () {
-                        //     // TODO: save progress
                         //   },
                         //   child: Icon(
                         //     Icons.save,
@@ -378,7 +378,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     });
 
     if (_progress.treesSeen.length >= _trail.trees.length) {
-      // TODO: show completion card
       print('trail complete');
       showDialog(
         context: context,
@@ -405,11 +404,24 @@ class _ExploreScreenState extends State<ExploreScreen> {
               'Congratulations! You\'ve been an amazing tree explorer and completed ${_trail.title}. Your knowledge of trees is growing!',
           actions: [
             FlatButton(
-              onPressed: () {
+              onPressed: () async {
+                // TODO: ABSTRACT DATABASE UPDATING AWAY FROM SCREEN FILE
+                // TODO: USE TREETREKUSER STREAMPROVIDER
+                var dbService = context.read<DatabaseService>();
+                var user = context.read<User>();
+                var snapshot =
+                    await dbService.userDataCollection.doc(user.uid).get();
+                TreeTrekUser tUser = dbService.treeTrekUser(snapshot);
+
+                tUser.tavelDistanceMeters += _trail.distanceMeters;
+                tUser.trailHistory.add(_trail.id);
+                tUser.trailsCompleted += 1;
+                tUser.treesSeen += _trail.trees.length;
+
+                dbService.updateUserData(tUser);
                 Navigator.popUntil(
                   context,
                   ModalRoute.withName(Navigator.defaultRouteName),
-                  // TODO: UPDATE USER INFORMATION
                 );
               },
               child: Text(

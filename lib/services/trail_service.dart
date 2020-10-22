@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:TreeTrek/models/trail.dart';
 
 class TrailService {
