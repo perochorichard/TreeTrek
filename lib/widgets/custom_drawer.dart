@@ -2,12 +2,14 @@ import 'package:TreeTrek/services/auth_service.dart';
 import 'package:TreeTrek/shared/custom_theme.dart';
 import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/custom_drawer_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var user = context.watch<User>();
     return Container(
       width: 180,
       child: Drawer(
@@ -27,8 +29,10 @@ class CustomDrawer extends StatelessWidget {
                         color: Colors.white,
                       ),
                       Text(
-                        'Guests',
-                        style: Fonts.primaryText.copyWith(color: Colors.white),
+                        user.isAnonymous ? 'Guest' : user.email,
+                        style:
+                            Fonts.secondaryText.copyWith(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -63,6 +67,8 @@ class CustomDrawer extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     context.read<AuthService>().signOut();
+                    Navigator.pushReplacementNamed(
+                        context, Navigator.defaultRouteName);
                   },
                   child: Row(
                     children: <Widget>[

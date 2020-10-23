@@ -1,5 +1,7 @@
 import 'package:TreeTrek/services/auth_service.dart';
 import 'package:TreeTrek/services/validator_service.dart';
+import 'package:TreeTrek/shared/custom_theme.dart';
+import 'package:TreeTrek/shared/fonts.dart';
 import 'package:TreeTrek/widgets/block_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +22,51 @@ class RegisterUserScreen extends StatelessWidget {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: Padding(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                    'assets/trails/maple_walk/images/maple_walk_thumbnail.png'),
+                fit: BoxFit.cover),
+          ),
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                      labelText: 'Profile Name',
+                      labelStyle: Fonts.secondaryText,
+                      prefixStyle: Fonts.primaryText,
+                      fillColor: Colors.white70,
+                      filled: true,
+                      errorStyle: TextStyle(
+                          backgroundColor: Colors.white.withOpacity(0.6),
+                          color: Colors.red)),
+                  validator: (val) {
+                    if (!ValidatorService.passwordValidator(val)) {
+                      return 'password must be minimum six characters, \nat least one uppercase letter, \none lowercase letter and one number.';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                ),
+              ),
               TextFormField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: Fonts.secondaryText,
+                  prefixStyle: Fonts.primaryText,
+                  fillColor: Colors.white70,
+                  filled: true,
+                  errorStyle: Fonts.secondaryText.copyWith(
+                      backgroundColor: Colors.white.withOpacity(0.6),
+                      color: Colors.red),
+                ),
                 validator: (val) {
                   if (val.isEmpty) {
                     return 'enter email address';
@@ -38,21 +77,40 @@ class RegisterUserScreen extends StatelessWidget {
                   return null;
                 },
               ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'password'),
-                validator: (val) {
-                  if (!ValidatorService.passwordValidator(val)) {
-                    return 'password must be minimum six characters, \nat least one uppercase letter, \none lowercase letter and one number.';
-                  }
-                  return null;
-                },
-                obscureText: true,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: Fonts.secondaryText,
+                      prefixStyle: Fonts.primaryText,
+                      fillColor: Colors.white70,
+                      filled: true,
+                      errorStyle: TextStyle(
+                          backgroundColor: Colors.white.withOpacity(0.6),
+                          color: Colors.red)),
+                  validator: (val) {
+                    if (!ValidatorService.passwordValidator(val)) {
+                      return 'password must be minimum six characters, \nat least one uppercase letter, \none lowercase letter and one number.';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                ),
               ),
               TextFormField(
                 controller: _confirmPasswordController,
-                decoration:
-                    const InputDecoration(labelText: 'confirm password'),
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
+                  labelStyle: Fonts.secondaryText,
+                  prefixStyle: Fonts.primaryText,
+                  fillColor: Colors.white70,
+                  filled: true,
+                  errorStyle: Fonts.secondaryText.copyWith(
+                      backgroundColor: Colors.white.withOpacity(0.6),
+                      color: Colors.red),
+                ),
                 validator: (val) {
                   if (val != _passwordController.text) {
                     return 'passwords do not match';
@@ -117,7 +175,11 @@ class RegisterUserScreen extends StatelessWidget {
                   }
                 },
                 height: 50,
-                title: Text('Sign Up'),
+                color: CustomTheme.primaryThemeColor,
+                title: Text(
+                  'Sign Up',
+                  style: Fonts.primaryText.copyWith(color: Colors.white),
+                ),
               ),
             ],
           ),

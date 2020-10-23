@@ -23,6 +23,6 @@ class MapTree {
     Position pos = await geo.getInitialPosition();
     double dist = await geo.getDistanceBetween(pos.latitude, pos.longitude,
         tree.coordinates.latitude, tree.coordinates.longitude);
-    return dist <= clickableDistanceMeters || learned || true;
+    return dist <= clickableDistanceMeters || learned;
   }
 }

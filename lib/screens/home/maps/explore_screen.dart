@@ -82,7 +82,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 showDialog(
                   context: context,
                   builder: (_) => CustomDialogBox(
-                    title: Text(tree.name),
+                    title: Text(
+                      tree.name,
+                      style: Fonts.primaryText.copyWith(color: Colors.white),
+                    ),
                     content:
                         'You aren\'t close enough to the tree! Try walking within the green circle around the tree.',
                     actions: [
@@ -419,10 +422,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 tUser.treesSeen += _trail.trees.length;
 
                 dbService.updateUserData(tUser);
-                Navigator.popUntil(
-                  context,
-                  ModalRoute.withName(Navigator.defaultRouteName),
-                );
+                Navigator.pushReplacementNamed(
+                    context, Navigator.defaultRouteName);
               },
               child: Text(
                 'OK',

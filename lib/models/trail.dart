@@ -56,4 +56,8 @@ class Trail {
       type: data['type'],
     );
   }
+
+  String toString() {
+    return 'title: $title\nid: $id\ncenter: ${centerCoordinate.toString()}\nzoom: $zoom';
+  }
 }

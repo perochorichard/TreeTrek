@@ -8,7 +8,7 @@ class AuthWrapperScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-
+    print(Navigator.defaultRouteName);
     if (firebaseUser != null) {
       return TrailsScreen();
     }

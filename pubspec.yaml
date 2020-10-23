@@ -44,6 +44,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.8.1
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/Treez_App_Icons/Treez_App_Icons/App Icon Main - 1024x1024.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,6 +74,7 @@ flutter:
     - assets/trails/heritage_tree_walk/images/
     - assets/tree_icons/
     - assets/other/
+    - assets/Treez_App_Icons/Treez_App_Icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
