@@ -49,45 +49,50 @@ class TrailHistoryScreen extends StatelessWidget {
                     (context, index) {
                       var trail = trails
                           .firstWhere((t) => t.id == user.trailHistory[index]);
-                      return Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black),
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: CustomTheme.primaryThemeColor,
                             ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image(
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(trail.thumbnailImageSrc),
-                                ),
-                              ),
-                              Spacer(),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    trail.title,
-                                    style: Fonts.primaryText,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image(
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(trail.thumbnailImageSrc),
                                   ),
-                                  Text(
-                                    '${trail.distanceMeters / 1000} km',
-                                    style: Fonts.secondaryText,
-                                  )
-                                ],
-                              ),
-                              Spacer(
-                                flex: 5,
-                              ),
-                            ],
-                          ));
+                                ),
+                                Spacer(),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      trail.title,
+                                      style: Fonts.primaryText
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    Text(
+                                      '${trail.distanceMeters / 1000} km',
+                                      style: Fonts.secondaryText
+                                          .copyWith(color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                Spacer(
+                                  flex: 5,
+                                ),
+                              ],
+                            )),
+                      );
                     },
                     childCount: user.trailHistory.length,
                   ),

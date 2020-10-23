@@ -71,8 +71,6 @@ class CustomDrawer extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           context.read<AuthService>().signOut();
-                          Navigator.pushReplacementNamed(
-                              context, Navigator.defaultRouteName);
                         },
                         child: Row(
                           children: <Widget>[

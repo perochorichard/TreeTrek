@@ -8,11 +8,11 @@ class ImageServiceProvider {
   }
 
   Future<Uint8List> get goldTree async {
-    return await ImageService().getBytesFromAsset('$_path/GREEN.png', 100);
+    return await ImageService().getBytesFromAsset('$_path/GOLD.png', 100);
   }
 
   Future<Uint8List> get greyTree async {
-    return await ImageService().getBytesFromAsset('$_path/GREEN.png', 100);
+    return await ImageService().getBytesFromAsset('$_path/GREY.png', 100);
   }
 
   final String _path = 'assets/tree_icons';
