@@ -1,5 +1,6 @@
 import 'package:TreeTrek/models/TreeTrekUser.dart';
 import 'package:TreeTrek/providers/image_provider.dart';
+import 'package:TreeTrek/providers/screen_navigation_provider.dart';
 import 'package:TreeTrek/providers/trails_provider.dart';
 import 'package:TreeTrek/screens/auth_wrapper_screen.dart';
 import 'package:TreeTrek/screens/authentication/register_user_screen.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         Provider<GeolocatorService>(
           create: (_) => GeolocatorService(),
         ),
+        ChangeNotifierProvider<ScreenNavigationProvider>(
+          create: (_) => ScreenNavigationProvider(),
+        )
       ],
       child: Builder(
         builder: (context) {

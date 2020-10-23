@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TrailsScreen extends StatelessWidget {
+  // TODO: CREATE NAVIGATOR SCREEN AND PROVIDER VARIABLE
   @override
   Widget build(BuildContext context) {
     var trails = context.watch<TrailsProvider>().trails;

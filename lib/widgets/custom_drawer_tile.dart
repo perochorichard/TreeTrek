@@ -1,5 +1,7 @@
+import 'package:TreeTrek/providers/screen_navigation_provider.dart';
 import 'package:TreeTrek/shared/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawerTile extends StatelessWidget {
   final String title;
@@ -10,7 +12,9 @@ class CustomDrawerTile extends StatelessWidget {
     return Container(
       height: 60,
       child: InkWell(
-        onTap: () => {Navigator.of(context).pushReplacementNamed(route)},
+        onTap: () {
+          context.read<ScreenNavigationProvider>().path = route;
+        },
         child: Row(
           children: <Widget>[
             Row(

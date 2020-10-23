@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:typed_data';
 
 import 'package:TreeTrek/models/TreeTrekUser.dart';
 import 'package:TreeTrek/models/map_tree.dart';
@@ -46,6 +47,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     setState(() {
       _loadingVisible = true;
     });
+    final greenTree = await _imageService.greenTree;
     Set<Marker> tempMarkers = HashSet<Marker>();
     Set<Polyline> tempPolylines = HashSet<Polyline>();
     Set<Circle> tempCircles = HashSet<Circle>();
@@ -58,7 +60,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         Marker(
             markerId: MarkerId(i.toString()),
             position: tree.coordinates,
-            icon: _imageService.greenTree,
+            icon: BitmapDescriptor.fromBytes(greenTree),
             anchor: Offset(0.5, 0.5),
             onTap: () async {
               setState(() {
@@ -342,8 +344,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
     );
   }
 
-  void _learnTree(int id) {
-    print('id: $id');
+  void _learnTree(int id) async {
+    setState(() {
+      _loadingVisible = true;
+    });
+    var goldTree = await _imageService.goldTree;
+
     MapTree mTree = _mapTrees.firstWhere((element) => element.id == id);
     mTree.learned = true;
     _mapTrees[_mapTrees.indexWhere((element) => element.id == id)] = mTree;
@@ -356,7 +362,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         markerId: MarkerId(id.toString()),
         position: _trail.trees[id].coordinates,
         anchor: Offset(0.5, 0.5),
-        icon: _imageService.goldTree,
+        icon: BitmapDescriptor.fromBytes(goldTree),
         onTap: () {
           Navigator.push(
             context,
@@ -378,10 +384,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
       _circles.remove(_circles
           .firstWhere((element) => element.circleId.value == id.toString()));
       _progress.treesSeen.add(mTree);
+      _loadingVisible = false;
     });
 
     if (_progress.treesSeen.length >= _trail.trees.length) {
-      print('trail complete');
       showDialog(
         context: context,
         builder: (_) => CustomDialogBox(

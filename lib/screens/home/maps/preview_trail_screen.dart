@@ -31,6 +31,10 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
   bool _loadingVisible = false;
 
   void _onMapCreated(GoogleMapController controller) async {
+    setState(() {
+      _loadingVisible = true;
+    });
+    var greenTree = await _imageService.greenTree;
     // SET TREE MARKERS AND POLY LINES
     Set<Marker> tempMarkers = HashSet<Marker>();
     Set<Polyline> tempPolylines = HashSet<Polyline>();
@@ -41,7 +45,7 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
         Marker(
           markerId: MarkerId(i.toString()),
           position: tree.coordinates,
-          icon: _imageService.greenTree,
+          icon: BitmapDescriptor.fromBytes(greenTree),
         ),
       );
 
@@ -57,17 +61,23 @@ class _PreviewTrailScreenState extends State<PreviewTrailScreen> {
     setState(() {
       _markers = tempMarkers;
       _polylines = tempPolylines;
+      _loadingVisible = false;
     });
     _controller = controller;
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
     int id = ModalRoute.of(context).settings.arguments as int;
-    _trail = context.watch<TrailsProvider>().findById(id);
-    _geoService = context.watch<GeolocatorService>();
-    _imageService = context.watch<ImageServiceProvider>();
+    _trail = context.read<TrailsProvider>().findById(id);
+    _geoService = context.read<GeolocatorService>();
+    _imageService = context.read<ImageServiceProvider>();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CustomTheme.primaryThemeColor,
